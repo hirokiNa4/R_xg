@@ -10,6 +10,11 @@ d$Train_Flag    <- 1  #Add in a flag to identify if observations fall in train d
 test$Response   <- NA #Add in a column for Response in the test data and initialize to NA
 test$Train_Flag <- 0  #Add in a flag to identify if observations fall in train data, 1 train, 0 test
 
+#concatenate train and test together, any features we create will be on both data sets with the same code. This will make scoring easy
+All_Data <- rbind(d,test) #79,146 observations, 129 variables 
+#All_Data_bk <- All_Data
+
+str(All_Data, list.len=ncol(All_Data))
 # separate "All_Data" to "train" $ "test"
 train.for.xgboost <- All_Data[All_Data$Train_Flag==1,]    # Remove Id
 test.for.xgboost  <- All_Data[All_Data$Train_Flag==0,]  # Remove Id $ Response
